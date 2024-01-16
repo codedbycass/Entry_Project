@@ -14,4 +14,5 @@ const Entry = mongoose.model(
   EntrySchema,
   "Entry"
 )
+
 export { Entry }
