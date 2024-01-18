@@ -4,23 +4,20 @@ export default function Form({ onNewPost }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
-  };
-
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    const formData = new FormData();
-    formData.append("firstName", firstName);
-    formData.append("lastName", lastName);
+
+    const postData = {
+      firstName: firstName,
+      lastName: lastName,
+    };
 
     fetch("http://localhost:8000/api/createPost", {
       method: "POST",
-      body: formData,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(postData),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -32,30 +29,29 @@ export default function Form({ onNewPost }) {
       });
   };
 
-  // rendering
-return (
+  return (
     <form onSubmit={handleSubmit}>
-    <label>
+      <label>
         First Name:
         <input
-            type="text"
-            value={firstName}
-            onChange={handleFirstNameChange}
-            required
+          type="text"
+          value={firstName}
+          name="firstName"
+          onChange={(e) => setFirstName(e.target.value)}
+          required
         />
-    </label>
-    <label>
+      </label>
+      <label>
         Last Name:
         <input
-            type="text"
-            value={lastName}
-            onChange={handleLastNameChange}
-            required
+          type="text"
+          value={lastName}
+          name="lastName"
+          onChange={(e) => setLastName(e.target.value)}
+          required
         />
-    </label>
-
+      </label>
       <button type="submit">Submit</button>
     </form>
   );
 }
-

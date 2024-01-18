@@ -20,4 +20,5 @@ router.get('/api/getEntries', getEntries)
 
 //UPDATE
 //like/favorite
+
 export { router }

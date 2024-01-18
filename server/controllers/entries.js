@@ -6,20 +6,18 @@ const { ObjectID } = pkg
 //CREATE CONTROLLER
 export const createPost = async (req, res) => {
     try {
-      // Create post with or without image
-        await Entry.create({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName
-    })
-        console.log("Post has been added!")
-        res.status(200).send({ message: "Post added successfully" })
+      console.log("Received request:", req);
+      const { firstName, lastName } = req.body;
+      await Entry.create({ firstName, lastName });
+      console.log("Post has been added!");
+      // res.status(200).send({ message: "Post added successfully" });
+      res.json({ message: "Post has been added!" }); // Send as JSON response
     } catch (err) {
-        console.log(err)
-        res.status(500).send({ message: "Error adding post" })
+      console.log(err);
+      res.status(500).send({ message: "Error adding post" });
     }
-}
-
-
+  };
+  
 //READ CONTROLLER
 export const getEntries = async (req, res) => {
     try {

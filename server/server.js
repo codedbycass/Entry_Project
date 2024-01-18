@@ -26,7 +26,8 @@ dotenv.config({ path: "./.env" })
 connectDB()
 
 // Initialize Express app
-const app = express()
+const app = express();
+
 
 // Static Folder
 app.use(express.static("public"))
