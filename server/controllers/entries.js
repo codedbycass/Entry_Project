@@ -7,8 +7,27 @@ const { ObjectID } = pkg
 export const createPost = async (req, res) => {
     try {
       console.log("Received request:", req);
-      const { firstName, lastName } = req.body;
-      await Entry.create({ firstName, lastName });
+      const { 
+        entryDate,
+        sleep,
+        wake,
+        reflections,
+        movement,
+        periodStatus,
+        sexualActivity,
+        food,
+        media
+        } = req.body;
+      await Entry.create({ 
+        entryDate,
+        sleep,
+        wake,
+        reflections,
+        movement,
+        periodStatus,
+        sexualActivity,
+        food,
+        media});
       console.log("Post has been added!");
       // res.status(200).send({ message: "Post added successfully" });
       res.json({ message: "Post has been added!" }); // Send as JSON response
