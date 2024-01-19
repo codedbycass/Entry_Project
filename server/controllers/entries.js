@@ -4,6 +4,7 @@ import pkg from 'mongodb'
 const { ObjectID } = pkg
 
 //CREATE CONTROLLER
+// Send new post to client side
 export const createPost = async (req, res) => {
     try {
       console.log("Received request:", req);
@@ -18,7 +19,7 @@ export const createPost = async (req, res) => {
         food,
         media
         } = req.body;
-      await Entry.create({ 
+      const newPost = await Entry.create({ 
         entryDate,
         sleep,
         wake,
@@ -30,7 +31,7 @@ export const createPost = async (req, res) => {
         media});
       console.log("Post has been added!");
       // res.status(200).send({ message: "Post added successfully" });
-      res.json({ message: "Post has been added!" }); // Send as JSON response
+      res.json({ message: "Post has been added!", data: newPost }); // Send as JSON response
     } catch (err) {
       console.log(err);
       res.status(500).send({ message: "Error adding post" });
