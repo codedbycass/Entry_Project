@@ -36,6 +36,16 @@ export default function Form({ onNewPost }) {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
+        //Reset form fields to blank when submitted
+        setEntryDate({});
+        setSleep("");
+        setWake("");
+        setReflections("");
+        setMovement("");
+        setPeriodStatus("");
+        setSexualActivity("");
+        setFood("");
+        setMedia("");
         onNewPost();
       })
       .catch((error) => {
