@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './Post.css'
 
 export default function Form({ onNewPost }) {
   const [entryDate, setEntryDate] = useState({});
@@ -54,9 +55,9 @@ export default function Form({ onNewPost }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="postContainer">
       <label>
-        Entry Date & Time:
+        Today is:
         <input
           type="date"
           value={entryDate}
@@ -66,8 +67,9 @@ export default function Form({ onNewPost }) {
           required
         />
       </label>
+      <div className="half">
       <label>
-        Sleep:
+        Last night I slept at:
         <input
           type="datetime-local"
           value={sleep}
@@ -78,7 +80,7 @@ export default function Form({ onNewPost }) {
         />
       </label>
       <label>
-        Wake:
+        Today I woke up at:
         <input
           type="datetime-local"
           value={wake}
@@ -88,6 +90,7 @@ export default function Form({ onNewPost }) {
           required
         />
       </label>
+      </div>
       <label>
         Reflections:
         <input
@@ -110,6 +113,7 @@ export default function Form({ onNewPost }) {
           required
         />
       </label>
+      <div className="half">
       <label id="periodStatus">
         <select name="periodStatus" onChange={(e) => setPeriodStatus(e.target.value)}>
           <option value="">Period Status</option>
@@ -128,6 +132,7 @@ export default function Form({ onNewPost }) {
         </select>
         <label/>
       </label>
+      </div>
       <label>
         What's cooking:
         <input
@@ -149,7 +154,7 @@ export default function Form({ onNewPost }) {
           required
         />
       </label>
-      <button type="submit">Submit</button>
+      <button type="submit" className="submitBtn">Submit</button>
     </form>
   );
 }
