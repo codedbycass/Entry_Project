@@ -1,0 +1,34 @@
+.postContainer label {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%; /* Set label width to 100% */
+  }
+  
+  .postContainer input,
+  .postContainer select {
+    width: 100%; /* Set input and select width to 100% */
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+    padding: 8px; /* Add padding for better appearance */
+    margin-top: 5px; /* Add margin for spacing */
+    display: inline-block;
+  }
+  
+  .submitBtn {
+    width: 100%; /* Set button width to 100% */
+    padding: 10px; /* Add padding for better appearance */
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+  }
+
+  .half {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .half label {
+    width: 48%; /* Set label width to 48% */
+  }
+  
+  .half input {
+    width: 100%; /* Set input width to 100% */
+  }
+  

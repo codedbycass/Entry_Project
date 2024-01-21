@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+
+* {
+    font-family: 'Karla', Helvetica, sans-serif;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+.feedContainer,
+.postContainer {
+    margin: 5rem 5rem;
+}
+

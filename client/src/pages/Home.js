@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar'
 import Post from '../components/Post'
 import Feed from '../components/Feed'
+import Date from '../components/Date'
 import { useState, useEffect } from "react"
 
 export default function Home() {
@@ -38,8 +39,6 @@ export default function Home() {
     return(
         <div>
             < Navbar />
-            <h1>Hello, User</h1>
-            <h2>It is 12:00pm</h2>
             < Post onNewPost={handleNewPost}/>
             < Feed getEntry={getEntry} setGetEntry={setGetEntry}/>
         </div>

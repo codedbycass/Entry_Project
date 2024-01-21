@@ -1,14 +1,18 @@
 import './App.css';
 import Home from './pages/Home'
-// import Account from './pages/Account'
+import Account from './pages/Account'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; 
 
 export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        < Home />
-        {/* < Account /> */}
-      </header>
-    </div>
-  )
+    <Router>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/account" element={<Account />} />
+        </Routes>
+    </Router>
+  );
 }
+
+

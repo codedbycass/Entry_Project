@@ -1,8 +1,10 @@
+import './Navbar.css'
+
 export default function Navbar() {
     return(
-        <div>
-            <a href="#">Home</a>
-            <a href="#">Account</a>
+        <div className="navBar">
+            <a href="/">Home</a>
+            <a href="/account">Account</a>
         </div>
     )
 }

@@ -1,3 +1,5 @@
+import './Feed.css'
+import Date from './Date'
 
 export default function Feed({ getEntry, setGetEntry}) {
     const deletePost = async (postId) => {
@@ -20,8 +22,8 @@ export default function Feed({ getEntry, setGetEntry}) {
         }
     }
     return (
-        <div>
-            <h1>This is the post feed</h1>
+        <div className="feedContainer">
+            <h1>It's currently <Date /></h1>
             {getEntry.map((entry) => 
                 <div>
                     <h2>Date Entered: {entry.entryDate}</h2>
