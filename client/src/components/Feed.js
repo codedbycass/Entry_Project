@@ -35,6 +35,7 @@ export default function Feed({ getEntry, setGetEntry}) {
                     <h2>Sexual Activity: {entry.sexualActivity}</h2>
                     <h2>Food: {entry.food}</h2>
                     <h2>Media: {entry.media}</h2>
+                    <img src={entry.image} alt="Daily pic"/>
                     <button onClick={() => deletePost(entry._id)}>Delete</button>
                 </div>
             )}

@@ -14,7 +14,7 @@ import pkg from 'mongodb'
 const { ObjectID } = pkg
 
 //CREATE
-router.post('/api/createPost', createPost)
+router.post('/api/createPost', upload.single("file"), createPost)
 
 //READ
 router.get('/api/getEntries', getEntries)

@@ -27,6 +27,13 @@ const EntrySchema = new mongoose.Schema({
   },
   media: {
     type: String
+  },
+  image: { // be able to add pics
+    type: String
+  },
+  cloudinaryId: { // be able to add pics
+    type: String,
+    require: true
   }
 })
 
