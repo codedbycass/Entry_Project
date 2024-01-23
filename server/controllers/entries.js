@@ -2,12 +2,23 @@
 import { Entry } from "../models/Entry.js" // import the schema
 import pkg from 'mongodb'
 const { ObjectID } = pkg
+import { cloudinary } from '../middleware/cloudinary.js' // be able to upload pics
 
 //CREATE CONTROLLER
-// Send new post to client side
 export const createPost = async (req, res) => {
     try {
-      console.log("Received request:", req);
+      console.log("Received request body:", req.body);
+      console.log("Received file:", req.file);
+      //handle if image is uploaded or not
+      let imageInfo = { secure_url: null, public_id: null }
+      //if there's a file in the req upload it
+      if (req.file && req.file.path) {
+        console.log("file received:", req.file)
+        const result = await cloudinary.uploader.upload(req.file.path)
+        console.log("cloudinary result:", result)
+        imageInfo = {secure_url: result.secure_url, public_id: result.public_id}
+      }
+      //destructure properites from body to be able to use
       const { 
         entryDate,
         sleep,
@@ -17,8 +28,9 @@ export const createPost = async (req, res) => {
         periodStatus,
         sexualActivity,
         food,
-        media
+        media,
         } = req.body;
+      // create a new post
       const newPost = await Entry.create({ 
         entryDate,
         sleep,
@@ -28,10 +40,13 @@ export const createPost = async (req, res) => {
         periodStatus,
         sexualActivity,
         food,
-        media});
+        media,
+        image: imageInfo.secure_url, // include cloudinary secure url
+        cloudinaryId: imageInfo.public_id // include public ID
+      });
       console.log("Post has been added!");
-      // res.status(200).send({ message: "Post added successfully" });
-      res.json({ message: "Post has been added!", data: newPost }); // Send as JSON response
+      res.status(200).send({ message: "Post added successfully" });
+      // res.json({ message: "Post has been added!", data: newPost }); // Send as JSON response
     } catch (err) {
       console.log(err);
       res.status(500).send({ message: "Error adding post" });

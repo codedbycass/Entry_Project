@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './Post.css'
 
 export default function Form({ onNewPost }) {
-  const [entryDate, setEntryDate] = useState({});
+  const [entryDate, setEntryDate] = useState("");
   const [sleep, setSleep] = useState("");
   const [wake, setWake] = useState("");
   const [reflections, setReflections] = useState("");
@@ -11,34 +11,53 @@ export default function Form({ onNewPost }) {
   const [sexualActivity, setSexualActivity] = useState("");
   const [food, setFood] = useState("");
   const [media, setMedia] = useState("");
-
+  const [photo, setPhoto] = useState(null);
+  //Submit button
   const handleSubmit = (event) => {
     event.preventDefault();
+  
+  // const postData = {
+  //   entryDate: entryDate,
+  //   sleep: sleep,
+  //   wake: wake,
+  //   reflections: reflections,
+  //   movement: movement,
+  //   periodStatus: periodStatus,
+  //   sexualActivity: sexualActivity,
+  //   food: food,
+  //   media: media,
+  //   file: photo,
+  // };
+  const formData = new FormData();
+    formData.append('entryDate', entryDate);
+    formData.append('sleep', sleep);
+    formData.append('wake', wake);
+    formData.append('reflections', reflections);
+    formData.append('movement', movement);
+    formData.append('periodStatus', periodStatus);
+    formData.append('sexualActivity', sexualActivity);
+    formData.append('food', food);
+    formData.append('media', media);
+    formData.append('file', photo);
 
-    const postData = {
-      entryDate: entryDate,
-      sleep: sleep,
-      wake: wake,
-      reflections: reflections,
-      movement: movement,
-      periodStatus: periodStatus,
-      sexualActivity: sexualActivity,
-      food: food,
-      media: media, 
-    };
+      // Log FormData entries
+  for (const entry of formData.entries()) {
+    console.log(entry);
+  }
 
     fetch("http://localhost:8000/api/createPost", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(postData),
+      body: formData
+      // headers: {
+      //   "Content-Type": "application/json",
+      // },
+      // body: JSON.stringify(postData),
     })
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
         //Reset form fields to blank when submitted
-        setEntryDate({});
+        setEntryDate("");
         setSleep("");
         setWake("");
         setReflections("");
@@ -47,12 +66,18 @@ export default function Form({ onNewPost }) {
         setSexualActivity("");
         setFood("");
         setMedia("");
+        setPhoto(null)
         onNewPost();
       })
       .catch((error) => {
         console.error("Error:", error);
-      });
-  };
+      })
+  }
+
+  const handlePhotoUpload = (e) => {
+    const file = e.target.files[0]
+    setPhoto(file)
+  }
 
   return (
     <form onSubmit={handleSubmit} className="postContainer">
@@ -152,6 +177,15 @@ export default function Form({ onNewPost }) {
           placeholder="Did you read, watch, or listen to anything lately?"
           onChange={(e) => setMedia(e.target.value)}
           required
+        />
+      </label>
+      <label>
+        Photo of the day
+        <input
+          type="file"
+          accept="image/*"
+          name="file"
+          onChange={handlePhotoUpload}
         />
       </label>
       <button type="submit" className="submitBtn">Submit</button>
