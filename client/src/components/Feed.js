@@ -1,5 +1,6 @@
 import './Feed.css'
 import Date from './Date'
+import ImagesFeed from './ImgsFeed'
 
 export default function Feed({ getEntry, setGetEntry}) {
     const deletePost = async (postId) => {
@@ -23,22 +24,27 @@ export default function Feed({ getEntry, setGetEntry}) {
     }
     return (
         <div className="feedContainer">
-            <h1>It's currently <Date /></h1>
-            {getEntry.map((entry) => 
-                <div>
-                    <h2>Date Entered: {entry.entryDate}</h2>
-                    <h2>Sleep: {entry.sleep}</h2>
-                    <h2>Wake: {entry.wake}</h2>
-                    <h2>Reflections: {entry.reflections}</h2>
-                    <h2>Movement: {entry.movement}</h2>
-                    <h2>Period Status: {entry.periodStatus}</h2>
-                    <h2>Sexual Activity: {entry.sexualActivity}</h2>
-                    <h2>Food: {entry.food}</h2>
-                    <h2>Media: {entry.media}</h2>
-                    <img src={entry.image} alt="Daily pic"/>
-                    <button onClick={() => deletePost(entry._id)}>Delete</button>
-                </div>
-            )}
+            <div className="textContainer">
+                <h1>It's currently <Date /></h1>
+                {getEntry.map((entry) => 
+                    <div>
+                        <h2>Date Entered: {entry.entryDate}</h2>
+                        <h2>Sleep: {entry.sleep}</h2>
+                        <h2>Wake: {entry.wake}</h2>
+                        <h2>Reflections: {entry.reflections}</h2>
+                        <h2>Movement: {entry.movement}</h2>
+                        <h2>Period Status: {entry.periodStatus}</h2>
+                        <h2>Sexual Activity: {entry.sexualActivity}</h2>
+                        <h2>Food: {entry.food}</h2>
+                        <h2>Media: {entry.media}</h2>
+                        <img src={entry.image} alt="Daily pic"/>
+                        <button onClick={() => deletePost(entry._id)}>Delete</button>
+                    </div>
+                )}
+            </div>
+            <div className="imgsContainer">
+                <ImagesFeed getEntry={getEntry} setGetEntry={setGetEntry} />
+            </div>
         </div>
     )
 }

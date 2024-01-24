@@ -6,10 +6,13 @@
 
 html {
     font-size: 62.5%;
+    cursor: crosshair;
 }
 
 .feedContainer,
 .postContainer {
     margin: 5rem 5rem;
 }
+
+
 

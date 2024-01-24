@@ -2,6 +2,7 @@
     display: block;
     margin-bottom: 10px;
     width: 100%; /* Set label width to 100% */
+    font-size: 1.5rem;
   }
   
   .postContainer input,
@@ -32,3 +33,28 @@
     width: 100%; /* Set input width to 100% */
   }
   
+  input,
+  select {
+    border: none;
+    border-bottom: .5px solid gray;
+    /* outline: none; */
+    cursor: text;
+  }
+
+  /* input:focus {
+    border: pink 1px solid;
+  } */
+
+  
+  input[type="file"] {
+    font-size: 10px;
+  }
+  
+  input[type="file"]::-webkit-file-upload-button {
+    border: none;
+    border-radius: 5px;
+  }
+
+  button {
+    cursor: pointer;
+  }
