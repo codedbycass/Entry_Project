@@ -19,10 +19,25 @@ export default function Form({ onNewPost }) {
   const toggleInputs = () => {
     setToggle(!toggle) // Toggle true and false
   }
+
+  //format date
+  const formatDate = (dateString) => {
+    const date = {year: 'numeric', month: '2-digit', day: '2-digit'}
+    return new Date(dateString).toLocaleDateString(undefined, date)
+  }
+  //format time
+  const formatTime = (timeString) => {
+    const time = { hour: 'numeric', minute: 'numeric', hour12: true };
+    return new Date(`2000-01-01T${timeString}`).toLocaleTimeString(undefined, time);
+  };
   //Submit button
   const handleSubmit = (event) => {
     event.preventDefault();
   
+  //format before submitting
+  const formattedEntryDate = formatDate(entryDate)
+  const formattedSleepTime = formatTime(sleep)
+  const formattedWakeTime = formatTime(wake)
   // const postData = {
   //   entryDate: entryDate,
   //   sleep: sleep,
@@ -35,10 +50,11 @@ export default function Form({ onNewPost }) {
   //   media: media,
   //   file: photo,
   // };
+
   const formData = new FormData();
-    formData.append('entryDate', entryDate);
-    formData.append('sleep', sleep);
-    formData.append('wake', wake);
+    formData.append('entryDate', formattedEntryDate);
+    formData.append('sleep', formattedSleepTime);
+    formData.append('wake', formattedWakeTime);
     formData.append('reflections', reflections);
     formData.append('movement', movement);
     formData.append('periodStatus', periodStatus);
@@ -101,7 +117,7 @@ export default function Form({ onNewPost }) {
         />
       </label>
       <label>
-        Photo of the day
+        Photo of the day:
         <input
           type="file"
           accept="image/*"
@@ -185,9 +201,9 @@ export default function Form({ onNewPost }) {
         </div>
         <div className="half">
           <label>
-          Last night I slept at:
+          Slept at:
           <input
-            type="datetime-local"
+            type="time"
             value={sleep}
             name="sleep"
             placeholder="What time did you sleep last night?"
@@ -196,9 +212,9 @@ export default function Form({ onNewPost }) {
           />
           </label>
           <label>
-            Today I woke up at:
+            Woke at:
             <input
-              type="datetime-local"
+              type="time"
               value={wake}
               name="wake"
               placeholder="What time did you wake up today"

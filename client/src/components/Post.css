@@ -47,7 +47,7 @@
 
   
   input[type="file"] {
-    font-size: 10px;
+    font-size: 13px;
   }
   
   input[type="file"]::-webkit-file-upload-button {
@@ -58,3 +58,12 @@
   button {
     cursor: pointer;
   }
+
+  @media screen and (max-width: 500px) {
+    .imgsContainer {
+        display: none;
+    }
+    .feedContainer{
+      width: 100%;
+    }
+}
