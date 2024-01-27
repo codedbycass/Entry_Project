@@ -18,6 +18,7 @@
     width: 100%; /* Set button width to 100% */
     padding: 10px; /* Add padding for better appearance */
     box-sizing: border-box; /* Include padding and border in the width calculation */
+    border-radius: 5px;
   }
 
   .half {
@@ -34,7 +35,8 @@
   }
   
   input,
-  select {
+  select,
+  .submitBtn {
     border: none;
     border-bottom: .5px solid gray;
     /* outline: none; */
@@ -55,15 +57,19 @@
     border-radius: 5px;
   }
 
-  button {
+  button,
+  .submitBtn:hover {
     cursor: pointer;
   }
 
-  @media screen and (max-width: 500px) {
-    .imgsContainer {
-        display: none;
-    }
-    .feedContainer{
-      width: 100%;
-    }
-}
+  .toggleContainer {
+    margin: 1rem;
+  }
+
+  .toggleContainer h3:hover {
+    color: rgb(72, 255, 0);
+  }
+
+  .submitBtn:hover {
+    background: rgba(72, 255, 0);
+  }

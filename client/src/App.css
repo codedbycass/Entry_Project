@@ -5,14 +5,20 @@
 }
 
 html {
+    margin-top: 3rem; /*pushes top of app down*/
     font-size: 62.5%;
     cursor: crosshair;
 }
 
 .feedContainer,
 .postContainer {
-    margin: 5rem 5rem;
+    margin: 5rem 25rem;
 }
 
-
+@media screen and (max-width: 975px) {
+    .feedContainer,
+    .postContainer {
+        margin: 5rem;
+    }
+}
 

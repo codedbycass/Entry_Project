@@ -1,10 +1,17 @@
+.navBar {
+    border: 1px solid black;
+    background: white;
+    padding: 2rem 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index:1;
+    text-align: right; /* Set text-align to right for the entire navbar */
+}
+
 .navBar a {
     text-decoration: none;
     font-size: 1.6rem;
     padding: 1rem;
-}
-
-.navBar {
-    border: 1px solid black;
-    padding: 2rem 0;
+    color: rgb(72, 255, 0);
 }

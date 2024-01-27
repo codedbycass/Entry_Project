@@ -32,7 +32,7 @@ export default function Feed({ getEntry, setGetEntry}) {
                 {sortedEntries.map((entry) =>
                     <div className="entryPost">
                         <div className="imgDay">
-                            <h2 className="entryDate"> ({entry.entryDate})</h2>
+                            <h2 id="entryDate"> ({entry.entryDate})</h2>
                             <img src={entry.image} alt="Daily pic" style={{width: '100%'}}/>
                         </div>
                         <div className="postFormat">

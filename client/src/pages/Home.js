@@ -1,8 +1,10 @@
 import Navbar from '../components/Navbar'
-import Post from '../components/Post'
-import Feed from '../components/Feed'
-import Date from '../components/Date'
+// import Post from '../components/Post'
+// import Feed from '../components/Feed'
+// import Date from '../components/Date'
 import { useState, useEffect } from "react"
+import Footer from '../components/Footer'
+import HomeParagraph from '../components/HomeParagraph'
 
 export default function Home() {
     //display fetches on parent; will be passed down to child (Feed.js)
@@ -37,10 +39,12 @@ export default function Home() {
     }
 
     return(
-        <div>
+        <div className="homeContainer">
             < Navbar />
-            < Post onNewPost={handleNewPost}/>
-            < Feed getEntry={getEntry} setGetEntry={setGetEntry}/>
+            {/* < Post onNewPost={handleNewPost}/>
+            < Feed getEntry={getEntry} setGetEntry={setGetEntry}/> */}
+            < HomeParagraph />
+            < Footer />
         </div>
     )
 }

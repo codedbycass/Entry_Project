@@ -1,6 +1,4 @@
 .feedContainer {
-    /* margin: 0 5rem; */
-    /* border: 1px solid red; */
     display: flex;
 }
 
@@ -22,8 +20,13 @@ h1 {
     text-align: center;
 }
 
-.entryDate {
+#entryDate {
     text-align: right;
+    color: rgb(72, 255, 0);
+    position:sticky;
+    top: 6.5rem;
+    font-size: 3rem;
+    border-bottom: 1px solid rgb(72, 255, 0);
 }
 
 
@@ -36,11 +39,12 @@ h2 {
 .sectionHeader {
     font-size: 2rem;
     font-weight: 300;
+    text-align: right;
 }
 
 .entryText,
 div.tabs {
-    text-align: right;
+    /* text-align: right; */
     font-size: 1.3rem;
 }
 
@@ -49,5 +53,11 @@ div.tabs {
     margin-left: 1rem;
 }
 
-
-
+@media screen and (max-width: 500px) {
+    .imgsContainer {
+        display: none;
+    }
+    .textContainer {
+    width: 100%;
+    }
+}

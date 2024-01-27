@@ -172,7 +172,7 @@ export default function Form({ onNewPost }) {
       </label>
 
       <div className="toggleContainer">
-      <h2 onClick={toggleInputs}>Add more health stats +</h2>
+      <h3 onClick={toggleInputs}>Add more health stats +</h3>
 
         { toggle && (
           <>
