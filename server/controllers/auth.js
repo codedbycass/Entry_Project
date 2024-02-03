@@ -2,6 +2,9 @@ import passport from 'passport';
 import validator from 'validator';
 import { User } from "../models/User.js";
 
+//Login CRUD
+
+//Get/Read login
 export const getLogin = (req, res) => {
   if (req.user) {
     res.json({ isAuthenticated: true });
@@ -10,6 +13,7 @@ export const getLogin = (req, res) => {
   }
 };
 
+//Create/Post (for login with existing email)
 export const postLogin = (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email)) {
@@ -42,6 +46,7 @@ export const postLogin = (req, res, next) => {
   })(req, res, next);
 };
 
+//Logout 
 export const logout = (req, res) => {
   req.logout();
   req.session.destroy(err => {
@@ -107,10 +112,9 @@ export const postSignup = async (req, res, next) => {
     }
 
     const newUser = new User({
+      username: req.body.username,
       email: req.body.email,
       password: req.body.password, 
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
     });
 
     await newUser.save();

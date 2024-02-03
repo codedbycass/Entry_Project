@@ -5,6 +5,7 @@ export default function Navbar() {
         <div className="navBar">
             <a href="/">Home</a>
             <a href="/account">Account</a>
+            <a href="/login">Sign In</a>
         </div>
     )
 }
