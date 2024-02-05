@@ -1,6 +1,4 @@
 .feedContainer {
-    /* margin: 0 5rem; */
-    border: 1px solid red;
     display: flex;
 }
 
@@ -10,10 +8,56 @@ img {
 
 .textContainer {
     width: 75%;
-    border: 1px solid red;
 }
 
 .imgsContainer {
     width: 25%;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
+}
+
+/* Text styling */
+h1 {
+    text-align: center;
+}
+
+#entryDate {
+    text-align: right;
+    color: rgb(72, 255, 0);
+    position:sticky;
+    top: 6.5rem;
+    font-size: 3rem;
+    border-bottom: 1px solid rgb(72, 255, 0);
+}
+
+
+.health, 
+h2 {
+    border-bottom: 1px solid black;
+    margin: 0;
+}
+
+.sectionHeader {
+    font-size: 2rem;
+    font-weight: 300;
+    text-align: right;
+}
+
+.entryText,
+div.tabs {
+    /* text-align: right; */
+    font-size: 1.3rem;
+}
+
+.imgsContainer {
+    margin-top: 1.8rem;
+    margin-left: 1rem;
+}
+
+@media screen and (max-width: 500px) {
+    .imgsContainer {
+        display: none;
+    }
+    .textContainer {
+    width: 100%;
+    }
 }
