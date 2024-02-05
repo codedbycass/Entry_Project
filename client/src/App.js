@@ -16,7 +16,7 @@ export default function App() {
       if (storedAuthState) {
         setIsAuthenticated(storedAuthState === 'true')
       } else {
-        fetch('https://localhost:3000/login', {
+        fetch('http://localhost:8000/api/login', {
           method: "GET",
           credentials: "include"
         })
@@ -32,6 +32,7 @@ export default function App() {
   return (
     <Router>
       <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
+      {/* <Navbar/> */}
         <Routes>
           <Route index element={<Home />} />
           <Route path="/" element={<Home />} />
