@@ -1,4 +1,3 @@
-import Navbar from '../components/Navbar'
 // import Post from '../components/Post'
 // import Feed from '../components/Feed'
 // import Date from '../components/Date'
@@ -40,7 +39,6 @@ export default function Home() {
 
     return(
         <div className="homeContainer">
-            < Navbar />
             {/* < Post onNewPost={handleNewPost}/>
             < Feed getEntry={getEntry} setGetEntry={setGetEntry}/> */}
             < HomeParagraph />

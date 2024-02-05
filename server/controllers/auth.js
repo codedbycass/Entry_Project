@@ -1,7 +1,13 @@
+//CONTROLLER FOR LOGIN/SIGNUP
 import passport from 'passport';
 import validator from 'validator';
 import { User } from "../models/User.js";
+import pkg from 'mongodb'
+const { ObjectID } = pkg
 
+//Login CRUD
+
+//Get/Read login
 export const getLogin = (req, res) => {
   if (req.user) {
     res.json({ isAuthenticated: true });
@@ -10,6 +16,7 @@ export const getLogin = (req, res) => {
   }
 };
 
+//Create/Post (for login with existing email)
 export const postLogin = (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email)) {
@@ -42,6 +49,7 @@ export const postLogin = (req, res, next) => {
   })(req, res, next);
 };
 
+//Logout 
 export const logout = (req, res) => {
   req.logout();
   req.session.destroy(err => {
@@ -54,7 +62,7 @@ export const logout = (req, res) => {
   });
 };
 
-export const getSignup = (req, res) => {
+export const getSignUp = (req, res) => {
   if (req.user) {
     res.json({ isAuthenticated: true });
   } else {
@@ -82,7 +90,7 @@ export const deleteAccount = async (req, res) => {
   }
 };
 
-export const postSignup = async (req, res, next) => {
+export const postSignUp = async (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email)) {
     validationErrors.push({ msg: "Please enter a valid email address." });
@@ -107,10 +115,10 @@ export const postSignup = async (req, res, next) => {
     }
 
     const newUser = new User({
+      username: req.body.username,
       email: req.body.email,
-      password: req.body.password, 
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
+      password: req.body.password,
+      confirmPassword: req.body.confirmPassword
     });
 
     await newUser.save();

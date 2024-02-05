@@ -15,6 +15,13 @@ html {
     margin: 5rem 25rem;
 }
 
+.emphasizeText {
+    color: rgb(72, 255, 0);
+    text-decoration: underline;
+}
+
+
+
 @media screen and (max-width: 975px) {
     .feedContainer,
     .postContainer {

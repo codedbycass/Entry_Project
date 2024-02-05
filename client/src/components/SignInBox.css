@@ -1,0 +1,29 @@
+.signInContainer {
+    width: 80%;
+    margin: 25rem auto;
+}
+
+.createAccountContainer {
+    width: 80%;
+    margin: 16rem auto;
+}
+
+.account {
+    text-align: center;
+}
+
+input, textarea {
+    background: none;
+}
+
+.NextBtn {
+    border: none;
+    background: none;
+    padding: 1rem 0;
+}
+
+.NextBtn:hover {
+    border: none;
+    background: none;
+    text-decoration: underline;
+}

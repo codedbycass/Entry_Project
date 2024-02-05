@@ -19,5 +19,6 @@ router.post("/login", postLogin);
 router.get("/logout", logout);
 router.get("/signup", getSignup);
 router.post("/signup", postSignup);
+console.log("Received sign up request")
 
 export { router }
