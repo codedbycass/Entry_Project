@@ -1,9 +1,9 @@
 import "../App.css"
 import "./SignInBox.css"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate} from "react-router-dom"
 
-export default function SignInBox({setIsAuthenticated}) {
+export default function SignInBox({}) {
     const navigate = useNavigate()
     const [errorMessage, setErrorMessage] = useState("")
     const [formData, setFormData] = useState({
@@ -22,17 +22,23 @@ export default function SignInBox({setIsAuthenticated}) {
     async function handleLogin(event) {
         event.preventDefault()
         try {
+            console.log("Before fetch")
             const response = await fetch('http://localhost:8000/api/login', {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(formData),
                 credentials: "include"
             })
+            console.log("After fetch")
+            console.log("Response status:", response.status)
             if (response.ok) {
-                const data = await response.json()
-                setIsAuthenticated(true)
+                // const data = await response.json()
+                // setIsAuthenticated(true)
+                // // console.log("Before navigation")
+                // // navigate("/account")
+                // // console.log("After navigation")
+                // localStorage.setItem('isAuthenticated', 'true')
                 navigate("/account")
-                localStorage.setItem('isAuthenticated', 'true')
             } else {
                 const errorMessage = await response.text()
                 setErrorMessage(`An error occured during sign in: ${errorMessage}`)

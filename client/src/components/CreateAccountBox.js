@@ -22,11 +22,11 @@ export default function CreateAccountBox() {
         })
     }
 
-    function handleSignUp(event) {
+    async function handleSignUp(event) {
         event.preventDefault()
         console.log(formData)
         try {
-            const response = fetch('http://localhost:8000/api/signup', {
+            const response = await fetch('http://localhost:8000/api/signup', {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(formData),
@@ -34,7 +34,10 @@ export default function CreateAccountBox() {
             })
         if (response.ok) {
             navigate("/login")
-        } 
+        } else {
+            const errorMessage = await response.text()
+            setErrorMessage(`An error occured during signup: ${errorMessage}`)
+        }
         } catch (err) {
             setErrorMessage("An error occured during signup. Please try again.")
         }
@@ -86,7 +89,7 @@ export default function CreateAccountBox() {
                 </label>
                 <button className="NextBtn">Submit →</button>
             </form>
-            <h4 className="account">Already have an account? <span ><a href="/signup" className="emphasizeText">Login</a></span></h4>
+            <h4 className="account">Already have an account? <span ><a href="/login" className="emphasizeText">Login</a></span></h4>
         </div>
     )
     }

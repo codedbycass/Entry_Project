@@ -22,11 +22,12 @@ export default function App() {
         })
           .then((response) => response.json())
           .then((data) => {
+            console.log("Authentication data:", data)
             setIsAuthenticated(data.isAuthenticated)
             localStorage.setItem('isAuthenticated', data.isAuthenticated)
           })
           .catch((error) => {
-            console.error("Error checking authentication status: error")
+            console.error("Error checking authentication status: error", error)
           })
       }}, [])
   return (
