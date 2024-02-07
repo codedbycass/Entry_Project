@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import './Post.css'
+import { createPost } from "../utilities/api"
 
 export default function Form({ onNewPost }) {
+  const [errorMessage, setErrorMessage] =useState("")
   const [entryDate, setEntryDate] = useState("");
   const [sleep, setSleep] = useState("");
   const [wake, setWake] = useState("");
@@ -31,27 +33,14 @@ export default function Form({ onNewPost }) {
     return new Date(`2000-01-01T${timeString}`).toLocaleTimeString(undefined, time);
   };
   //Submit button
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-  
   //format before submitting
-  const formattedEntryDate = formatDate(entryDate)
-  const formattedSleepTime = formatTime(sleep)
-  const formattedWakeTime = formatTime(wake)
-  // const postData = {
-  //   entryDate: entryDate,
-  //   sleep: sleep,
-  //   wake: wake,
-  //   reflections: reflections,
-  //   movement: movement,
-  //   periodStatus: periodStatus,
-  //   sexualActivity: sexualActivity,
-  //   food: food,
-  //   media: media,
-  //   file: photo,
-  // };
-
-  const formData = new FormData();
+    const formattedEntryDate = formatDate(entryDate)
+    const formattedSleepTime = formatTime(sleep)
+    const formattedWakeTime = formatTime(wake)
+    //create new form data
+    const formData = new FormData();
     formData.append('entryDate', formattedEntryDate);
     formData.append('sleep', formattedSleepTime);
     formData.append('wake', formattedWakeTime);
@@ -62,21 +51,12 @@ export default function Form({ onNewPost }) {
     formData.append('food', food);
     formData.append('media', media);
     formData.append('file', photo);
-
       // Log FormData entries
-  for (const entry of formData.entries()) {
-    console.log(entry);
-  }
-
-    fetch("http://localhost:8000/api/createPost", {
-      method: "POST",
-      body: formData
-      // headers: {
-      //   "Content-Type": "application/json",
-      // },
-      // body: JSON.stringify(postData),
-    })
-      .then((response) => response.json())
+    for (const entry of formData.entries()) {
+      console.log(entry);
+    }
+    try {
+      await createPost(formData)
       .then((data) => {
         console.log("Success:", data);
         //Reset form fields to blank when submitted
@@ -92,9 +72,10 @@ export default function Form({ onNewPost }) {
         setPhoto(null)
         onNewPost();
       })
-      .catch((error) => {
-        console.error("Error:", error);
-      })
+    }
+      catch(error) {
+        setErrorMessage("Error:", error)
+      }
   }
 
   const handlePhotoUpload = (e) => {

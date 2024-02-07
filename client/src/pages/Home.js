@@ -6,41 +6,8 @@ import Footer from '../components/Footer'
 import HomeParagraph from '../components/HomeParagraph'
 
 export default function Home() {
-    //display fetches on parent; will be passed down to child (Feed.js)
-    const [getEntry, setGetEntry] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
-    const [error, setError] = useState(null)
-    //make fetch global
-    useEffect(() => {
-        fetchEntry()
-    }, [])
-
-    const fetchEntry = async () => {
-        try {
-            const response = await fetch(`http://localhost:8000/api/getEntries`) // this fetch displays data from MD
-            const data = await response.json()
-        setGetEntry(data.entries)
-        } catch (error) {
-        setError(error)
-        } finally {
-        setIsLoading(false)
-        }
-    }
-    if (isLoading) {
-    return <p>Loading team data...</p>
-    }
-    if (error) {
-    return <p>Error fetching data: {error.message}</p>
-    }
-
-    const handleNewPost = () => {
-        fetchEntry()
-    }
-
     return(
         <div className="homeContainer">
-            {/* < Post onNewPost={handleNewPost}/>
-            < Feed getEntry={getEntry} setGetEntry={setGetEntry}/> */}
             < HomeParagraph />
             < Footer />
         </div>

@@ -1,25 +1,17 @@
 import './Feed.css'
 import Date from './Date'
 import ImagesFeed from './ImgsFeed'
+import { deletePost } from '../utilities/api'
 
 export default function Feed({ getEntry, setGetEntry}) {
-    const deletePost = async (postId) => {
+    const handleDeletePost = async (postId) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/deleteEntry/${postId}`, {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include"
-        })
-        if (response.ok) {
-            // Update local state using setPosts from parent
+            await deletePost(postId)
             setGetEntry((currentPosts) =>
                 currentPosts.filter((post) => post._id !== postId)
             )
-        } else {
-            console.error("Failed to delete the post", await response.json())
-        }
         } catch (error) {
-        console.error("There was an error deleting the post: ", error)
+            console.error(error.message)
         }
     }
     // sort entries by date (recent to oldest)
@@ -52,7 +44,7 @@ export default function Feed({ getEntry, setGetEntry}) {
                                     <p>Wake: <span className="entryText">{entry.wake}</span></p>
                             </div>
                         </div>
-                        <button onClick={() => deletePost(entry._id)}>Delete</button>
+                        <button onClick={() => handleDeletePost(entry._id)}>Delete</button>
                     </div>
                 )}
             </div>
