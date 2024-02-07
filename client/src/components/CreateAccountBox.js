@@ -2,6 +2,7 @@ import "../App.css"
 import "./SignInBox.css"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { postEntry } from "../utilities/api"
 
 export default function CreateAccountBox() {
     const navigate = useNavigate()
@@ -26,20 +27,10 @@ export default function CreateAccountBox() {
         event.preventDefault()
         console.log(formData)
         try {
-            const response = await fetch('http://localhost:8000/api/signup', {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(formData),
-                credentials: "include"
-            })
-        if (response.ok) {
+            await postEntry(formData)
             navigate("/login")
-        } else {
-            const errorMessage = await response.text()
-            setErrorMessage(`An error occured during signup: ${errorMessage}`)
-        }
-        } catch (err) {
-            setErrorMessage("An error occured during signup. Please try again.")
+        } catch (error) {
+            setErrorMessage(error.message)
         }
     }
 
@@ -89,6 +80,7 @@ export default function CreateAccountBox() {
                 </label>
                 <button className="NextBtn">Submit →</button>
             </form>
+            { errorMessage && <p>{errorMessage}</p>}
             <h4 className="account">Already have an account? <span ><a href="/login" className="emphasizeText">Login</a></span></h4>
         </div>
     )

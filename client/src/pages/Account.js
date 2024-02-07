@@ -3,6 +3,9 @@ import Feed from '../components/Feed'
 import Date from '../components/Date'
 import { useState, useEffect } from "react"
 import Footer from '../components/Footer'
+import {
+    fetchEntry
+} from "../utilities/api"
 
 export default function Home() {
     //display fetches on parent; will be passed down to child (Feed.js)
@@ -11,29 +14,31 @@ export default function Home() {
     const [error, setError] = useState(null)
     //make fetch global
     useEffect(() => {
-        fetchEntry()
+        const fetchData = async () => {
+            try {
+                const entries = await fetchEntry()
+                setGetEntry(entries)
+            } catch (error) {
+                setError(error)
+            } finally {
+                setIsLoading(false)
+            }
+        }
+        fetchData()
     }, [])
-
-    const fetchEntry = async () => {
+    const handleNewPost = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/api/getEntries`) // this fetch displays data from MD
-            const data = await response.json()
-        setGetEntry(data.entries)
+            const entries = await fetchEntry()
+            setGetEntry(entries)
         } catch (error) {
-        setError(error)
-        } finally {
-        setIsLoading(false)
+            setError(error)
         }
     }
     if (isLoading) {
-    return <p>Loading team data...</p>
+    return <p>Loading data...</p>
     }
     if (error) {
     return <p>Error fetching data: {error.message}</p>
-    }
-
-    const handleNewPost = () => {
-        fetchEntry()
     }
 
     return(
